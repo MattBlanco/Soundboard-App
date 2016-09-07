@@ -14,8 +14,9 @@ public class Sound implements Parcelable{
     private Activity activity;
     protected MediaPlayer mp;
     protected Button button;
+    protected boolean isPrepared;
 
-    public Sound(int sound, int buttonID, Activity _activity){
+    public Sound(int buttonID, Activity _activity, int sound){
         super();
         this.activity = _activity;
         mp = MediaPlayer.create(activity, sound);
@@ -26,6 +27,7 @@ public class Sound implements Parcelable{
         super();
         this.activity = _activity;
         button = (Button) activity.findViewById(buttonID);
+        mp = new MediaPlayer();
     }
 
     @Override

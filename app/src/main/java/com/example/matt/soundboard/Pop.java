@@ -1,6 +1,7 @@
 package com.example.matt.soundboard;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -11,35 +12,39 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.database.Cursor;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+
 /**
  * Created by Matt on 9/4/2016.
+ *
+ * uri content://media/external/audio/media
  */
 public class Pop extends Activity{
 
     private String[] mAudioPath;
     private MediaPlayer mMediaPlayer;
     private String[] mMusicList;
-    static final double PERCENTOFSCREENHEIGHT = 0.6;
-    static final double PERCENTOFSCREENWIDTH = 0.8;
+    static final double PERCENT_OF_SCREEN_HEIGHT = 0.6;
+    static final double PERCENT_OF_SCREEN_WIDTH = 0.8;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sound_setup);
 
+
+        //make sure new activity acts as a popup
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
-
-
-
         int width = dm.widthPixels;
         int height = dm.heightPixels;
-
-        getWindow().setLayout((int)(width*PERCENTOFSCREENWIDTH), (int)(height*PERCENTOFSCREENHEIGHT));
-
-        mMediaPlayer = new MediaPlayer();
+        getWindow().setLayout((int)(width*PERCENT_OF_SCREEN_WIDTH), (int)(height*PERCENT_OF_SCREEN_HEIGHT));
 
         ListView mListView = (ListView) findViewById(R.id.song_list);
+
 
         mMusicList = getAudioList();
 
@@ -52,14 +57,14 @@ public class Pop extends Activity{
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
                                     long arg3) {
-
+                Intent resultIntent = new Intent();
+                resultIntent.putExtra("song path", mMusicList[arg2]);
+                setResult(Activity.RESULT_OK, resultIntent);
+                finish();
             }
         });
 
-
-
     }
-
 
     private String[] getAudioList() {
         final Cursor mCursor = getContentResolver().query(
@@ -84,6 +89,5 @@ public class Pop extends Activity{
 
         return songs;
     }
-
 
 }

@@ -18,7 +18,6 @@
         android:layout_height="wrap_content"
         android:text="Remove Sound"
         android:id="@+id/remove_sound"
-        android:layout_marginBottom="69dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
