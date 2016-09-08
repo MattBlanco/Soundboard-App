@@ -9,7 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import java.io.File;
 import java.io.IOException;
-//TODO: clear sounds with long press, record audio instead of using user's audiofiles
+//TODO: record audio instead of using user's audiofiles
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
         sound.button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                //checks if sound has been assigned to button
                 sound.mp.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                     @Override
                     public void onPrepared(MediaPlayer mediaPlayer) {
