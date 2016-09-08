@@ -131,12 +131,14 @@ public class MainActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                     sound2.button.setText(ResultPath);
-                }/*
-                if (resultCode == CLEAR_SOUND) {
-                    sound2.mp.reset();
-                    sound2.isPrepared = false;
-                    sound2.button.setText("No sound");
-                }*/
+                }
+                else if (resultCode == CLEAR_SOUND) {
+                    sound.button.setText("No sound");
+                    sound.mp.reset();
+                    sound.isPrepared = false;
+                }
+                else{
+                }
                 break;
             }
         }

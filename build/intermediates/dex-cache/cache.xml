@@ -1,3 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" />
+<items version="2" >
 
+    <item
+        jar="C:\Users\Matt\AndroidStudioProjects\Soundboard\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        revision="24.0.1"
+        sha1="27af758664d45b956558b884789a54bfe991813a">
+        <dex dex="C:\Users\Matt\AndroidStudioProjects\Soundboard\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_356703508c64265a109393e4b90061f940fe5bbf\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\Matt\AndroidStudioProjects\Soundboard\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.1\jars\classes.jar"
+        jumboMode="true"
+        revision="24.0.1"
+        sha1="f8efd0096475e0daf054267b61544e10dc776503">
+        <dex dex="C:\Users\Matt\AndroidStudioProjects\Soundboard\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-v4-22.2.1_62a30869f03d62fac9984a13eee65414a69525b5\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\Matt\AndroidStudioProjects\Soundboard\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        revision="24.0.1"
+        sha1="edc6fd0e434bc1e23c7a153fb3393a420f39b6c2">
+        <dex dex="C:\Users\Matt\AndroidStudioProjects\Soundboard\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_9429f765f859747de14be898b63e4b19fe5061c3\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\Matt\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\22.2.1\support-annotations-22.2.1.jar"
+        jumboMode="true"
+        revision="24.0.1"
+        sha1="61a0ff5c29295ec56d7e0bd3d25d95dbf71b4b2b">
+        <dex dex="C:\Users\Matt\AndroidStudioProjects\Soundboard\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-22.2.1_488e52bbae90b7a96594bbae0a9a973390ade3a8\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\Matt\AndroidStudioProjects\Soundboard\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\jars\classes.jar"
+        jumboMode="true"
+        revision="24.0.1"
+        sha1="4486e953d1f35f8ccab098b1dd67146366d5f731">
+        <dex dex="C:\Users\Matt\AndroidStudioProjects\Soundboard\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-appcompat-v7-22.2.1_348cdef9996698dd04fc76aa11388a3fc611b2e0\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\Matt\AndroidStudioProjects\Soundboard\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.1\jars\libs\internal_impl-22.2.1.jar"
+        jumboMode="true"
+        revision="24.0.1"
+        sha1="c471eaaba13ff64f6e0383d1c30a9cdc9a97efeb">
+        <dex dex="C:\Users\Matt\AndroidStudioProjects\Soundboard\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-22.2.1_7c47c26237b636c4368d85a37c2dc198a466ba29\classes.dex" />
+    </item>
+
+</items>

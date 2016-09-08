@@ -4,43 +4,30 @@
     api-level="23"
     density="420dpi"
     format="7"
-    timestamp="877157134205646"
-    token="-4397244682667360276"
-    verifier="COMPATIBLE" >
+    timestamp="884503998449149"
+    token="-4397244682667360276" >
 
     <task
         name="javac"
-        duration="188" />
+        duration="973" />
     <task
         name="instant-run-dex"
-        duration="287" />
+        duration="0" />
     <task
         name="instant-run-transform"
-        duration="65" />
+        duration="327" />
     <task
         name="verifier"
-        duration="5" />
+        duration="84" />
 
     <artifact
-        location="C:\Users\Matt\AndroidStudioProjects\Soundboard\app\build\intermediates\reload-dex\debug\classes.dex"
-        type="RELOAD_DEX" />
+        location="C:\Users\Matt\AndroidStudioProjects\Soundboard\app\build\outputs\apk\app-debug.apk"
+        type="MAIN" />
 
-    <build timestamp="875430495987193" >
+    <build timestamp="884503998449149" >
         <artifact
             location="C:\Users\Matt\AndroidStudioProjects\Soundboard\app\build\outputs\apk\app-debug.apk"
             type="MAIN" />
-    </build>
-    <build timestamp="876958099112088" >
-        <artifact
-            location="C:\Users\Matt\AndroidStudioProjects\Soundboard\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_8\classes.dex"
-            type="DEX" />
-    </build>
-    <build
-        timestamp="877157134205646"
-        verifier="COMPATIBLE" >
-        <artifact
-            location="C:\Users\Matt\AndroidStudioProjects\Soundboard\app\build\intermediates\reload-dex\debug\classes.dex"
-            type="RELOAD_DEX" />
     </build>
 
 </instant-run>
