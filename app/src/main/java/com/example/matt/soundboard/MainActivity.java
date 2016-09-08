@@ -43,7 +43,8 @@ public class MainActivity extends AppCompatActivity {
                 });
 
                 if(!sound.isPrepared){
-                    Intent intent = new Intent(MainActivity.this, Pop.class);
+                    //opens popup to set up a new sound
+                    Intent intent = new Intent(MainActivity.this, SoundSetup.class);
                     startActivityForResult(intent, SOUND_1);
                 }
                 else if(sound.mp.isPlaying()) {
@@ -56,10 +57,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //long click behavior to always set up a new sound
         sound.button.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Pop.class);
+                Intent intent = new Intent(MainActivity.this, SoundSetup.class);
                 startActivityForResult(intent, SOUND_1);
                 return true;
             }
@@ -67,8 +69,6 @@ public class MainActivity extends AppCompatActivity {
 
         sound2.button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
-                //checks if sound has been assigned to button
                 sound2.mp.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                     @Override
                     public void onPrepared(MediaPlayer mediaPlayer) {
@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
                 });
 
                 if(!sound2.isPrepared){
-                    Intent intent2 = new Intent(MainActivity.this, Pop.class);
+                    Intent intent2 = new Intent(MainActivity.this, SoundSetup.class);
                     startActivityForResult(intent2, SOUND_2);
                 }
                 else if(sound2.mp.isPlaying()) {
@@ -90,7 +90,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
+        sound2.button.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Intent intent = new Intent(MainActivity.this, SoundSetup.class);
+                startActivityForResult(intent, SOUND_2);
+                return true;
+            }
+        });
 
     }
 
@@ -111,18 +118,17 @@ public class MainActivity extends AppCompatActivity {
                     }
                     sound.button.setText(ResultPath);
                 }
-                else if (resultCode == CLEAR_SOUND) {
+                if (resultCode == CLEAR_SOUND) {
                     sound.button.setText("No sound");
                     sound.mp.reset();
                     sound.isPrepared = false;
                 }
-                else{
-                }
                 break;
             }
             case(SOUND_2) : {
-                if (resultCode == Activity.RESULT_OK) {
-                    ResultPath = data.getStringExtra("song path");
+                if (resultCode == SET_SOUND) {
+                    sound2.mp.reset();
+                    ResultPath = data.getStringExtra("audiofile");
                     path = extStorageDirectory + File.separator + ResultPath;
                     try {
                         sound2.mp.setDataSource(path);
@@ -132,12 +138,10 @@ public class MainActivity extends AppCompatActivity {
                     }
                     sound2.button.setText(ResultPath);
                 }
-                else if (resultCode == CLEAR_SOUND) {
-                    sound.button.setText("No sound");
-                    sound.mp.reset();
-                    sound.isPrepared = false;
-                }
-                else{
+                if (resultCode == CLEAR_SOUND) {
+                    sound2.button.setText("No sound");
+                    sound2.mp.reset();
+                    sound2.isPrepared = false;
                 }
                 break;
             }

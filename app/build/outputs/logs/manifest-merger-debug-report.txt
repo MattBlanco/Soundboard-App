@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\Matt\AndroidStudioProjects\Soundboard\app\src\main\AndroidManifest.xml:2:1-27:12
+ADDED from C:\Users\Matt\AndroidStudioProjects\Soundboard\app\src\main\AndroidManifest.xml:2:1-28:12
 	package
 		ADDED from C:\Users\Matt\AndroidStudioProjects\Soundboard\app\src\main\AndroidManifest.xml:3:5-42
 		INJECTED from C:\Users\Matt\AndroidStudioProjects\Soundboard\app\src\main\AndroidManifest.xml
@@ -18,7 +18,7 @@ ADDED from C:\Users\Matt\AndroidStudioProjects\Soundboard\app\src\main\AndroidMa
 	android:name
 		ADDED from C:\Users\Matt\AndroidStudioProjects\Soundboard\app\src\main\AndroidManifest.xml:5:22-77
 application
-ADDED from C:\Users\Matt\AndroidStudioProjects\Soundboard\app\src\main\AndroidManifest.xml:7:5-25:19
+ADDED from C:\Users\Matt\AndroidStudioProjects\Soundboard\app\src\main\AndroidManifest.xml:7:5-26:19
 MERGED from [com.android.support:appcompat-v7:22.2.1] C:\Users\Matt\AndroidStudioProjects\Soundboard\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:support-v4:22.2.1] C:\Users\Matt\AndroidStudioProjects\Soundboard\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.1\AndroidManifest.xml:22:5-20
 	android:label
@@ -45,12 +45,12 @@ category#android.intent.category.LAUNCHER
 ADDED from C:\Users\Matt\AndroidStudioProjects\Soundboard\app\src\main\AndroidManifest.xml:17:17-77
 	android:name
 		ADDED from C:\Users\Matt\AndroidStudioProjects\Soundboard\app\src\main\AndroidManifest.xml:17:27-74
-activity#com.example.matt.soundboard.Pop
+activity#com.example.matt.soundboard.SoundSetup
 ADDED from C:\Users\Matt\AndroidStudioProjects\Soundboard\app\src\main\AndroidManifest.xml:21:9-23:21
 	android:theme
 		ADDED from C:\Users\Matt\AndroidStudioProjects\Soundboard\app\src\main\AndroidManifest.xml:22:13-57
 	android:name
-		ADDED from C:\Users\Matt\AndroidStudioProjects\Soundboard\app\src\main\AndroidManifest.xml:21:19-38
+		ADDED from C:\Users\Matt\AndroidStudioProjects\Soundboard\app\src\main\AndroidManifest.xml:21:19-45
 uses-sdk
 INJECTED from C:\Users\Matt\AndroidStudioProjects\Soundboard\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 MERGED from [com.android.support:appcompat-v7:22.2.1] C:\Users\Matt\AndroidStudioProjects\Soundboard\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\AndroidManifest.xml:20:5-43

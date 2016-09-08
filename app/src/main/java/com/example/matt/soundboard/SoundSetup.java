@@ -18,7 +18,7 @@ import android.database.Cursor;
  * Popup to setup sounds
  * uri content://media/external/audio/media
  */
-public class Pop extends Activity{
+public class SoundSetup extends Activity{
 
     private String[] mAudioPath;
     private MediaPlayer mMediaPlayer;
@@ -49,6 +49,7 @@ public class Pop extends Activity{
         ArrayAdapter<String> mAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, mMusicList);
         mListView.setAdapter(mAdapter);
+
 
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 

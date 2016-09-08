@@ -24,7 +24,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.matt.soundboard.Pop"
+            android:name="com.example.matt.soundboard.SoundSetup"
             android:theme="@style/AppTheme.CustomTheme" />
     </application>
 
