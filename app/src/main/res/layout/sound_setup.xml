@@ -14,6 +14,7 @@
         android:layout_centerHorizontal="true" />
 
     <Button
+        android:focusable="false"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Remove Sound"
@@ -22,12 +23,12 @@
         android:layout_centerHorizontal="true" />
 
     <ListView
-        android:id="@+id/song_list"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/select_sound"
+        android:id="@+id/song_list"
         android:layout_centerHorizontal="true"
-        android:layout_above="@+id/remove_sound" />
+        android:layout_above="@+id/remove_sound"
+        android:layout_below="@+id/select_sound" />
 
 
 </RelativeLayout>

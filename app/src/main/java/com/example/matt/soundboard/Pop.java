@@ -9,17 +9,13 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.database.Cursor;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-
 /**
  * Created by Matt on 9/4/2016.
- *
+ * Popup to setup sounds
  * uri content://media/external/audio/media
  */
 public class Pop extends Activity{
@@ -29,12 +25,15 @@ public class Pop extends Activity{
     private String[] mMusicList;
     static final double PERCENT_OF_SCREEN_HEIGHT = 0.6;
     static final double PERCENT_OF_SCREEN_WIDTH = 0.8;
+    static final int SET_SOUND = 1;
+    static final int CLEAR_SOUND = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sound_setup);
-
+        Button removeSound = (Button) this.findViewById(R.id.remove_sound);
+        final Intent resultIntent = new Intent();
 
         //make sure new activity acts as a popup
         DisplayMetrics dm = new DisplayMetrics();
@@ -43,11 +42,10 @@ public class Pop extends Activity{
         int height = dm.heightPixels;
         getWindow().setLayout((int)(width*PERCENT_OF_SCREEN_WIDTH), (int)(height*PERCENT_OF_SCREEN_HEIGHT));
 
+
+        //create a list view so a user can see all the audio files
         ListView mListView = (ListView) findViewById(R.id.song_list);
-
-
         mMusicList = getAudioList();
-
         ArrayAdapter<String> mAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, mMusicList);
         mListView.setAdapter(mAdapter);
@@ -57,15 +55,23 @@ public class Pop extends Activity{
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
                                     long arg3) {
-                Intent resultIntent = new Intent();
-                resultIntent.putExtra("song path", mMusicList[arg2]);
-                setResult(Activity.RESULT_OK, resultIntent);
+                resultIntent.putExtra("audiofile", mMusicList[arg2]);
+                setResult(SET_SOUND, resultIntent);
+                finish();
+            }
+        });
+
+        removeSound.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                setResult(CLEAR_SOUND, resultIntent);
                 finish();
             }
         });
 
     }
 
+
+    //Creates a list of audio files from user's sdcard
     private String[] getAudioList() {
         final Cursor mCursor = getContentResolver().query(
                 MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
