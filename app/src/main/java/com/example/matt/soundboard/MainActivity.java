@@ -1,6 +1,5 @@
 package com.example.matt.soundboard;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Environment;
@@ -9,7 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import java.io.File;
 import java.io.IOException;
-//TODO: record audio instead of using user's audiofiles
+//TODO: support for rotating the screen, record audio instead of using user's audiofiles, possible loop
 
 public class MainActivity extends AppCompatActivity {
 
@@ -52,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else{
                     sound.mp.seekTo(0);
+                    sound.mp.setLooping(true);
                     sound.mp.start();
                 }
             }
@@ -101,12 +101,15 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
+    //returns result of a popup and either sets the button with the new sound or clears sound on the current button
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch(requestCode) {
             case (SOUND_1) : {
                 if (resultCode == SET_SOUND) {
+                    //resets the media player to clear the current song
                     sound.mp.reset();
                     ResultPath = data.getStringExtra("audiofile");
                     path = extStorageDirectory + File.separator + ResultPath;
@@ -119,6 +122,7 @@ public class MainActivity extends AppCompatActivity {
                     sound.button.setText(ResultPath);
                 }
                 if (resultCode == CLEAR_SOUND) {
+                    //resets the media player to clear current the sound
                     sound.button.setText("No sound");
                     sound.mp.reset();
                     sound.isPrepared = false;
