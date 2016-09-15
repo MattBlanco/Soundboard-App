@@ -1,6 +1,5 @@
 package com.example.matt.soundboard;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Environment;
@@ -9,7 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import java.io.File;
 import java.io.IOException;
-//TODO: record audio instead of using user's audiofiles
+//TODO: record audio instead of using user's audiofiles, possible loop
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,81 +31,95 @@ public class MainActivity extends AppCompatActivity {
         sound2 = new Sound(R.id.button2,this);
 
 
-        sound.button.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                //checks if sound has been assigned to button
-                sound.mp.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                    @Override
-                    public void onPrepared(MediaPlayer mediaPlayer) {
-                        sound.isPrepared = true;
-                    }
-                });
+        sound.button.setOnClickListener(onClickListener);
+        sound2.button.setOnClickListener(onClickListener);
 
-                if(!sound.isPrepared){
-                    //opens popup to set up a new sound
-                    Intent intent = new Intent(MainActivity.this, SoundSetup.class);
-                    startActivityForResult(intent, SOUND_1);
-                }
-                else if(sound.mp.isPlaying()) {
-                    sound.mp.pause();
-                }
-                else{
-                    sound.mp.seekTo(0);
-                    sound.mp.start();
-                }
-            }
-        });
-
-        //long click behavior to always set up a new sound
-        sound.button.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                Intent intent = new Intent(MainActivity.this, SoundSetup.class);
-                startActivityForResult(intent, SOUND_1);
-                return true;
-            }
-        });
-
-        sound2.button.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                sound2.mp.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                    @Override
-                    public void onPrepared(MediaPlayer mediaPlayer) {
-                        sound2.isPrepared = true;
-                    }
-                });
-
-                if(!sound2.isPrepared){
-                    Intent intent2 = new Intent(MainActivity.this, SoundSetup.class);
-                    startActivityForResult(intent2, SOUND_2);
-                }
-                else if(sound2.mp.isPlaying()) {
-                    sound2.mp.pause();
-                }
-                else{
-                    sound2.mp.seekTo(0);
-                    sound2.mp.start();
-                }
-            }
-        });
-
-        sound2.button.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                Intent intent = new Intent(MainActivity.this, SoundSetup.class);
-                startActivityForResult(intent, SOUND_2);
-                return true;
-            }
-        });
-
+        sound.button.setOnLongClickListener(onLongClickListener);
+        sound2.button.setOnLongClickListener(onLongClickListener);
     }
 
+    //set up button listener for all buttons
+    private View.OnClickListener onClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            switch(v.getId()){
+                case R.id.button:
+                    //checks if sound is ready to play
+                    sound.mp.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                        @Override
+                        public void onPrepared(MediaPlayer mediaPlayer) {
+                            sound.isPrepared = true;
+                        }
+                    });
+
+                    if(!sound.isPrepared){
+                        //opens popup to set up a new sound
+                        Intent intent = new Intent(MainActivity.this, SoundSetup.class);
+                        startActivityForResult(intent, SOUND_1);
+                    }
+                    else if(sound.mp.isPlaying()) {
+                        sound.mp.pause();
+                    }
+                    else{
+                        //restarts sound
+                        sound.mp.seekTo(0);
+                        sound.mp.start();
+                    }
+                    break;
+
+                case R.id.button2:
+                    sound2.mp.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                        @Override
+                        public void onPrepared(MediaPlayer mediaPlayer) {
+                            sound2.isPrepared = true;
+                        }
+                    });
+                    if(!sound2.isPrepared){
+                        Intent intent2 = new Intent(MainActivity.this, SoundSetup.class);
+                        startActivityForResult(intent2, SOUND_2);
+                    }
+                    else if(sound2.mp.isPlaying()) {
+                        sound2.mp.pause();
+                    }
+                    else{
+                        sound2.mp.seekTo(0);
+                        sound2.mp.start();
+                    }
+                    break;
+
+                default:
+                    break;
+            }
+        }
+    };
+
+    //set up listener for long clicks for all buttons
+    private View.OnLongClickListener onLongClickListener = new View.OnLongClickListener(){
+        @Override
+        public boolean onLongClick(View v) {
+            Intent intent = new Intent(MainActivity.this, SoundSetup.class);
+            switch(v.getId()){
+                case R.id.button:
+                    startActivityForResult(intent, SOUND_1); //opens up popup to setup sound
+                    break;
+                case R.id.button2:
+                    startActivityForResult(intent, SOUND_2);
+                default:
+                    break;
+
+            }
+            return true;
+        }
+    };
+
+    //returns result of a popup and either sets the button with the new sound or clears sound on the current button
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch(requestCode) {
             case (SOUND_1) : {
                 if (resultCode == SET_SOUND) {
+                    //resets the media player to clear the current song
                     sound.mp.reset();
                     ResultPath = data.getStringExtra("audiofile");
                     path = extStorageDirectory + File.separator + ResultPath;
@@ -119,6 +132,7 @@ public class MainActivity extends AppCompatActivity {
                     sound.button.setText(ResultPath);
                 }
                 if (resultCode == CLEAR_SOUND) {
+                    //resets the media player to clear current the sound
                     sound.button.setText("No sound");
                     sound.mp.reset();
                     sound.isPrepared = false;
@@ -145,6 +159,8 @@ public class MainActivity extends AppCompatActivity {
                 }
                 break;
             }
+            default:
+                break;
         }
     }
 
