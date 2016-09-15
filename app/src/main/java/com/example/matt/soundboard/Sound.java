@@ -13,12 +13,6 @@ public class Sound{
     protected Button button;
     protected boolean isPrepared;
 
-    public Sound(int buttonID, Activity _activity, int sound){
-        super();
-        this.activity = _activity;
-        mp = MediaPlayer.create(activity, sound);
-        button = (Button) activity.findViewById(buttonID);
-    }
 
     public Sound(int buttonID, Activity _activity) {
         super();
