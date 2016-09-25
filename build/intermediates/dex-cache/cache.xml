@@ -5,7 +5,7 @@
         jar="C:\Users\Matt\AndroidStudioProjects\Soundboard\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
         jumboMode="true"
         revision="24.0.1"
-        sha1="0ad52cd82ba73bbc7035ce6ea3886d192bdc12b6">
+        sha1="11079e8095964bd6ae235f69185313bf12c52f29">
         <dex dex="C:\Users\Matt\AndroidStudioProjects\Soundboard\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_356703508c64265a109393e4b90061f940fe5bbf\classes.dex" />
     </item>
     <item
@@ -19,7 +19,7 @@
         jar="C:\Users\Matt\AndroidStudioProjects\Soundboard\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
         jumboMode="true"
         revision="24.0.1"
-        sha1="d1563d83c982517c295b3e28dea14914f0ac1a1f">
+        sha1="5ee37b048a2af82ad1f265d36d80e543f8b512f6">
         <dex dex="C:\Users\Matt\AndroidStudioProjects\Soundboard\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_9429f765f859747de14be898b63e4b19fe5061c3\classes.dex" />
     </item>
     <item
