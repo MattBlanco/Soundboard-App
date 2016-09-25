@@ -8,19 +8,29 @@ import android.os.Bundle;
 import android.view.View;
 import java.io.File;
 import java.io.IOException;
-//TODO: record audio instead of using user's audiofiles, possible loop
+//TODO: different images if sound is playing or just use name of file, figure out way to simplify onclicklistener, record audio instead of using user's audiofiles, possible loop
 
 public class MainActivity extends AppCompatActivity {
 
+    //used for request codes
     static final int SOUND_1 = 1;
     static final int SOUND_2 = 2;
-    static final int SET_SOUND = 1;
-    static final int CLEAR_SOUND = 0;
-    Sound sound;
-    Sound sound2;
-    String ResultPath;
-    String path;
-    String extStorageDirectory = Environment.getExternalStorageDirectory().toString();
+    static final int SOUND_3 = 3;
+    static final int SOUND_4 = 4;
+    static final int SOUND_5 = 5;
+    static final int SOUND_6 = 6;
+    static final int SOUND_7 = 7;
+    static final int SOUND_8 = 8;
+
+    //different sounds
+    private Sound sound;
+    private Sound sound2;
+    private Sound sound3;
+    private Sound sound4;
+    private Sound sound5;
+    private Sound sound6;
+    private Sound sound7;
+    private Sound sound8;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,13 +39,30 @@ public class MainActivity extends AppCompatActivity {
 
         sound = new Sound(R.id.button,this);
         sound2 = new Sound(R.id.button2,this);
-
+        sound3 = new Sound(R.id.button3,this);
+        sound4 = new Sound(R.id.button4,this);
+        sound5 = new Sound(R.id.button5,this);
+        sound6 = new Sound(R.id.button6,this);
+        sound7 = new Sound(R.id.button7,this);
+        sound8 = new Sound(R.id.button8,this);
 
         sound.button.setOnClickListener(onClickListener);
         sound2.button.setOnClickListener(onClickListener);
+        sound3.button.setOnClickListener(onClickListener);
+        sound4.button.setOnClickListener(onClickListener);
+        sound5.button.setOnClickListener(onClickListener);
+        sound6.button.setOnClickListener(onClickListener);
+        sound7.button.setOnClickListener(onClickListener);
+        sound8.button.setOnClickListener(onClickListener);
 
         sound.button.setOnLongClickListener(onLongClickListener);
         sound2.button.setOnLongClickListener(onLongClickListener);
+        sound3.button.setOnLongClickListener(onLongClickListener);
+        sound4.button.setOnLongClickListener(onLongClickListener);
+        sound5.button.setOnLongClickListener(onLongClickListener);
+        sound6.button.setOnLongClickListener(onLongClickListener);
+        sound7.button.setOnLongClickListener(onLongClickListener);
+        sound8.button.setOnLongClickListener(onLongClickListener);
     }
 
     //set up button listener for all buttons
@@ -44,49 +71,29 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View v) {
             switch(v.getId()){
                 case R.id.button:
-                    //checks if sound is ready to play
-                    sound.mp.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                        @Override
-                        public void onPrepared(MediaPlayer mediaPlayer) {
-                            sound.isPrepared = true;
-                        }
-                    });
-
-                    if(!sound.isPrepared){
-                        //opens popup to set up a new sound
-                        Intent intent = new Intent(MainActivity.this, SoundSetup.class);
-                        startActivityForResult(intent, SOUND_1);
-                    }
-                    else if(sound.mp.isPlaying()) {
-                        sound.mp.pause();
-                    }
-                    else{
-                        //restarts sound
-                        sound.mp.seekTo(0);
-                        sound.mp.start();
-                    }
+                    sound.soundLogic();
                     break;
-
                 case R.id.button2:
-                    sound2.mp.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                        @Override
-                        public void onPrepared(MediaPlayer mediaPlayer) {
-                            sound2.isPrepared = true;
-                        }
-                    });
-                    if(!sound2.isPrepared){
-                        Intent intent2 = new Intent(MainActivity.this, SoundSetup.class);
-                        startActivityForResult(intent2, SOUND_2);
-                    }
-                    else if(sound2.mp.isPlaying()) {
-                        sound2.mp.pause();
-                    }
-                    else{
-                        sound2.mp.seekTo(0);
-                        sound2.mp.start();
-                    }
+                    sound2.soundLogic();
                     break;
-
+                case R.id.button3:
+                    sound3.soundLogic();
+                    break;
+                case R.id.button4:
+                    sound4.soundLogic();
+                    break;
+                case R.id.button5:
+                    sound5.soundLogic();
+                    break;
+                case R.id.button6:
+                    sound6.soundLogic();
+                    break;
+                case R.id.button7:
+                    sound7.soundLogic();
+                    break;
+                case R.id.button8:
+                    sound8.soundLogic();
+                    break;
                 default:
                     break;
             }
@@ -104,6 +111,25 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case R.id.button2:
                     startActivityForResult(intent, SOUND_2);
+                    break;
+                case R.id.button3:
+                    startActivityForResult(intent, SOUND_3);
+                    break;
+                case R.id.button4:
+                    startActivityForResult(intent, SOUND_4);
+                    break;
+                case R.id.button5:
+                    startActivityForResult(intent, SOUND_5);
+                    break;
+                case R.id.button6:
+                    startActivityForResult(intent, SOUND_6);
+                    break;
+                case R.id.button7:
+                    startActivityForResult(intent, SOUND_7);
+                    break;
+                case R.id.button8:
+                    startActivityForResult(intent, SOUND_8);
+                    break;
                 default:
                     break;
 
@@ -118,50 +144,39 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         switch(requestCode) {
             case (SOUND_1) : {
-                if (resultCode == SET_SOUND) {
-                    //resets the media player to clear the current song
-                    sound.mp.reset();
-                    ResultPath = data.getStringExtra("audiofile");
-                    path = extStorageDirectory + File.separator + ResultPath;
-                    try {
-                        sound.mp.setDataSource(path);
-                        sound.mp.prepare();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    sound.button.setText(ResultPath);
-                }
-                if (resultCode == CLEAR_SOUND) {
-                    //resets the media player to clear current the sound
-                    sound.button.setText("No sound");
-                    sound.mp.reset();
-                    sound.isPrepared = false;
-                }
+                sound.setSound(resultCode, data);
                 break;
             }
             case(SOUND_2) : {
-                if (resultCode == SET_SOUND) {
-                    sound2.mp.reset();
-                    ResultPath = data.getStringExtra("audiofile");
-                    path = extStorageDirectory + File.separator + ResultPath;
-                    try {
-                        sound2.mp.setDataSource(path);
-                        sound2.mp.prepare();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    sound2.button.setText(ResultPath);
-                }
-                if (resultCode == CLEAR_SOUND) {
-                    sound2.button.setText("No sound");
-                    sound2.mp.reset();
-                    sound2.isPrepared = false;
-                }
+                sound2.setSound(resultCode, data);
+                break;
+            }
+            case(SOUND_3) : {
+                sound3.setSound(resultCode, data);
+                break;
+            }
+            case(SOUND_4) : {
+                sound4.setSound(resultCode, data);
+                break;
+            }
+            case(SOUND_5) : {
+                sound5.setSound(resultCode, data);
+                break;
+            }
+            case(SOUND_6) : {
+                sound6.setSound(resultCode, data);
+                break;
+            }
+            case(SOUND_7) : {
+                sound7.setSound(resultCode, data);
+                break;
+            }
+            case(SOUND_8) : {
+                sound8.setSound(resultCode, data);
                 break;
             }
             default:
                 break;
         }
     }
-
 }
